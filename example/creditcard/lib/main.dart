@@ -25,23 +25,34 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
+    return Scaffold(
+      appBar: const CupertinoNavigationBar(
         middle: Text('Lucas Design'),
       ),
-      child: Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Banner(
-              message: 'Novo',
-              location: BannerLocation.topEnd,
-              child: LCreditCard(),
-              color: Colors.white,
-            ),
-            CupertinoButton(
-              child: const Text('New credit card'),
-              onPressed: () {},
+            LCreditCard(
+              holderName: 'Lucas P Oliveira'.toUpperCase(),
+              cardNumber: '**** ***** **** 1234',
+              labelValidThru: 'valid thru',
+              validThru: '03/35',
+              labelCvv: 'cvv',
+              cvv: '123',
+              backgroundGradient: const LinearGradient(
+                colors: [
+                  Colors.redAccent,
+                  Colors.blueGrey,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              headerWidget: CupertinoButton(
+                child: const Text('Trocar'),
+                onPressed: () {},
+              ),
+              bottomWidget: const Text('VISA'),
             ),
           ],
         ),

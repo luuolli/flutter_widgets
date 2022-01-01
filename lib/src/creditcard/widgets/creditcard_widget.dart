@@ -1,14 +1,27 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LCreditCard extends StatelessWidget {
-  final VoidCallback? onMainAction;
-  final VoidCallback? onSecondaryAction;
+  final String holderName;
+  final String cardNumber;
+  final String labelValidThru;
+  final String validThru;
+  final String labelCvv;
+  final String cvv;
+  final Widget? headerWidget;
+  final Widget? bottomWidget;
+  final Gradient? backgroundGradient;
 
   const LCreditCard({
     Key? key,
-    this.onMainAction,
-    this.onSecondaryAction,
+    required this.holderName,
+    required this.cardNumber,
+    required this.labelValidThru,
+    required this.validThru,
+    required this.labelCvv,
+    required this.cvv,
+    this.headerWidget,
+    this.bottomWidget,
+    this.backgroundGradient,
   }) : super(key: key);
 
   @override
@@ -20,69 +33,71 @@ class LCreditCard extends StatelessWidget {
       constraints: const BoxConstraints(
         maxWidth: 380,
         minWidth: 380,
-        minHeight: 200,
+        minHeight: 220,
       ),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Colors.deepPurple,
-            Colors.deepPurpleAccent,
-          ],
-        ),
+        gradient: backgroundGradient ??
+            const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.blueAccent,
+                Colors.lightBlue,
+                Colors.blueGrey,
+              ],
+            ),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Flag card',
+                holderName,
                 style: _theme.textTheme.bodyText2,
               ),
-              CupertinoButton(
-                padding: EdgeInsets.zero,
-                child: const Text('trocar'),
-                onPressed: () {},
-              ),
+              if (headerWidget != null) headerWidget!,
             ],
           ),
-          ...[
-            const SizedBox(height: 20),
-            Text(
-              'Holder name',
-              style: _theme.textTheme.bodyText1,
+          Text(
+            cardNumber,
+            style: _theme.textTheme.headline6?.copyWith(
+              letterSpacing: 5,
             ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '**** **** **** 1234',
-                  style: _theme.textTheme.headline6,
-                ),
-                Text(
-                  'mm/aa',
-                  style: _theme.textTheme.subtitle2,
-                ),
-              ],
-            ),
-          ],
-          if (true) ...[
-            const SizedBox(height: 15),
-            SizedBox(
-              width: double.maxFinite,
-              child: CupertinoButton.filled(
-                child: const Text(
-                  'Add new credit card',
-                ),
-                onPressed: () {},
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    labelValidThru,
+                    style: _theme.textTheme.caption,
+                  ),
+                  Text(
+                    validThru,
+                    style: _theme.textTheme.subtitle2,
+                  ),
+                ],
               ),
-            ),
-          ]
+              Column(
+                children: [
+                  Text(
+                    'cvv',
+                    style: _theme.textTheme.caption,
+                  ),
+                  Text(
+                    '123',
+                    style: _theme.textTheme.subtitle2,
+                  ),
+                ],
+              ),
+              if (bottomWidget != null) bottomWidget!,
+            ],
+          ),
         ],
       ),
     );

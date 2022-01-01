@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   lucas_widgets:
-    path: ../../../lucas_widgets
+    path: ../../../flutter_widgets
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
